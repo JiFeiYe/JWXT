@@ -33,12 +33,54 @@ public class InfoServlet extends HttpServlet {
         HttpSession session = req.getSession();
 
         if ("root".equals(oper)) { // 管理员查看所有信息，允许增删改查，添加分页
-            StudentMapper sm = new StudentMapperImpl();
-            TeacherMapper tm = new TeacherMapperImpl();
-            List<Student> stults = sm.getAll();
-            List<Teacher> tealts = tm.getAll();
-            session.setAttribute("stults", stults);
-            session.setAttribute("tealts", tealts);
+            int total; // 数据库总共几条
+            int pid; // 当前第几页
+            int count = 7; // 每页十五条
+            int pagetotal; // 最多有几页
+            { // 学生分页
+                StudentMapper sm = new StudentMapperImpl();
+                total = sm.queryCount();
+                pid = 1; // 当前第几页
+                String temp = req.getParameter("stupid");
+                if (temp != null) // 预料pid为空的情况
+                    pid = Integer.parseInt(temp);
+                pagetotal = total / count; // 至多几页
+                if (total % count != 0) // 无法整除则需多一页
+                    pagetotal += 1;
+                else if (pagetotal == 0) // 0页则设置为1页
+                    pagetotal = 1;
+                if (pid > pagetotal) // 若当前页数比总页数大
+                    pid = pagetotal;
+                if (pid <= 0) // 若当前页数非正数
+                    pid = 1;
+                int start = (pid - 1) * count;
+                List<Student> stuList = sm.findAllByPage(start, count);
+                session.setAttribute("stupagetotal", pagetotal);
+                session.setAttribute("stupid", pid);
+                session.setAttribute("stuList", stuList);
+            }
+            { // 老师分页
+                TeacherMapper tm = new TeacherMapperImpl();
+                total = tm.queryCount();
+                String temp = req.getParameter("teachpid");
+                pid = 1; // 当前第几页
+                if (temp != null) // 预料pid为空的情况
+                    pid = Integer.parseInt(temp);
+                pagetotal = total / count; // 至多几页
+                if (total % count != 0) // 无法整除则需多一页
+                    pagetotal += 1;
+                else if (pagetotal == 0) // 0页则设置为1页
+                    pagetotal = 1;
+                if (pid > pagetotal) // 若当前页数比总页数大
+                    pid = pagetotal;
+                if (pid <= 0) // 若当前页数非正数
+                    pid = 1;
+                int start = (pid - 1) * count;
+                List<Teacher> teachList = tm.findAllByPage(start, count);
+                session.setAttribute("teachpagetotal", pagetotal);
+                session.setAttribute("teachpid", pid);
+                session.setAttribute("teachList", teachList);
+            }
             resp.sendRedirect("allmessage.jsp");
         } else if ("detail".equals(oper)) { // 管理员查看详情，session需覆盖下两个elseif
             String man = req.getParameter("man");

@@ -12,4 +12,7 @@ public interface StudentMapper {
 
     boolean updateStudent(Student student);
 
+    int queryCount();
+
+    List<Student> findAllByPage(@Param("start") int start, @Param("pagesize") int pagesize);
 }

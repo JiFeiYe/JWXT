@@ -1,5 +1,6 @@
 package com.tu.mapper;
 
+import com.tu.pojo.Student;
 import com.tu.pojo.Teacher;
 import org.apache.ibatis.annotations.Param;
 
@@ -11,4 +12,8 @@ public interface TeacherMapper {
     Teacher getAllById(@Param("teachId") int teachId);
 
     boolean updateTeacher(Teacher teach);
+
+    int queryCount();
+
+    List<Teacher> findAllByPage(@Param("start") int start, @Param("pagesize") int pagesize);
 }

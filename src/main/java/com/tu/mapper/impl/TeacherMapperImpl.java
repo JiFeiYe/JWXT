@@ -46,6 +46,7 @@ public class TeacherMapperImpl implements TeacherMapper {
             session = BaseDAO.getSession();
             TeacherMapper tm = session.getMapper(TeacherMapper.class);
             isU = tm.updateTeacher(teach);
+            session.commit();
         } catch (Exception ex) {
             ex.printStackTrace();
         } finally {
@@ -53,4 +54,36 @@ public class TeacherMapperImpl implements TeacherMapper {
         }
         return isU;
     }
+
+    public int queryCount() {
+        SqlSession session = null;
+        int count = 0;
+        try {
+            session = BaseDAO.getSession();
+            TeacherMapper tm = session.getMapper(TeacherMapper.class);
+            count = tm.queryCount();
+        } catch (Exception ex) {
+            ex.printStackTrace();
+        } finally {
+            BaseDAO.closeSession(session);
+        }
+        return count;
+    }
+
+    public List<Teacher> findAllByPage(int start, int pagesize) {
+        SqlSession session = null;
+        List<Teacher> lts = new ArrayList<Teacher>();
+        try {
+            session = BaseDAO.getSession();
+            TeacherMapper tm = session.getMapper(TeacherMapper.class);
+            lts = tm.findAllByPage(start, pagesize);
+        } catch (Exception ex) {
+            ex.printStackTrace();
+        } finally {
+            BaseDAO.closeSession(session);
+        }
+        return lts;
+    }
+
+
 }

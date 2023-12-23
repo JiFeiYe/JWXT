@@ -23,4 +23,13 @@
         from jwxt.student
         where userID = #{userId};
     </select>
+    <select id="queryCount" resultType="java.lang.Integer">
+        select count(1)
+        from jwxt.student;
+    </select>
+    <select id="findAllByPage" resultType="com.tu.pojo.Student">
+        select *
+        from jwxt.student
+        limit #{start}, #{pagesize};
+    </select>
 </mapper>

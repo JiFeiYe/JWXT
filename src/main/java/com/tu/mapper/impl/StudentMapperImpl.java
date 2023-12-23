@@ -46,11 +46,42 @@ public class StudentMapperImpl implements StudentMapper {
             session = BaseDAO.getSession();
             StudentMapper sm = session.getMapper(StudentMapper.class);
             isU = sm.updateStudent(student);
+            session.commit();
         } catch (Exception ex) {
             ex.printStackTrace();
         } finally {
             BaseDAO.closeSession(session);
         }
         return isU;
+    }
+
+    public int queryCount() {
+        SqlSession session = null;
+        int count = 0;
+        try {
+            session = BaseDAO.getSession();
+            StudentMapper sm = session.getMapper(StudentMapper.class);
+            count = sm.queryCount();
+        } catch (Exception ex) {
+            ex.printStackTrace();
+        } finally {
+            BaseDAO.closeSession(session);
+        }
+        return count;
+    }
+
+    public List<Student> findAllByPage(int start, int pagesize) {
+        SqlSession session = null;
+        List<Student> lts = new ArrayList<Student>();
+        try {
+            session = BaseDAO.getSession();
+            StudentMapper sm = session.getMapper(StudentMapper.class);
+            lts = sm.findAllByPage(start, pagesize);
+        } catch (Exception ex) {
+            ex.printStackTrace();
+        } finally {
+            BaseDAO.closeSession(session);
+        }
+        return lts;
     }
 }

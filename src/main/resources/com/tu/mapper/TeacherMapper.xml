@@ -25,4 +25,13 @@
         from jwxt.teacher
         where teachID = #{teachId};
     </select>
+    <select id="queryCount" resultType="java.lang.Integer">
+        select count(1)
+        from jwxt.teacher;
+    </select>
+    <select id="findAllByPage" resultType="com.tu.pojo.Teacher">
+        select *
+        from jwxt.teacher
+        limit #{start}, #{pagesize};
+    </select>
 </mapper>
