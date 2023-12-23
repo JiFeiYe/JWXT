@@ -15,6 +15,11 @@
             classID   = #{classId}
         where teachID = #{teachId};
     </update>
+    <delete id="delTeacherById">
+        delete
+        from jwxt.teacher
+        where teachID = #{teachId};
+    </delete>
 
     <select id="getAll" resultType="Teacher">
         select *

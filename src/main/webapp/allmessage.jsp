@@ -35,7 +35,7 @@
             <td>${stu.classId}</td>
             <td>${stu.majorId}</td>
             <td><a href="/JWXT/InfoServlet?oper=detail&man=stu&userId=${stu.userId}" id="update_stu">修改</a></td>
-            <td><a href="#" id="delete_stu">删除</a></td>
+            <td><a href="/JWXT/InfoServlet?oper=studel&userId=${stu.userId}">删除</a></td>
         </tr>
     </c:forEach>
     <tr>
@@ -97,7 +97,7 @@
             <td>${teach.classId}</td>
             <td><a href="/JWXT/InfoServlet?oper=detail&man=teach&teachId=${teach.teachId}" id="update_teach">修改</a>
             </td>
-            <td><a href="#" id="delete_teach">删除</a></td>
+            <td><a href="/JWXT/InfoServlet?oper=teachdel&teachId=${teach.teachId}">删除</a></td>
         </tr>
     </c:forEach>
     <tr>

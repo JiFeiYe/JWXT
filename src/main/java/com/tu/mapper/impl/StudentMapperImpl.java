@@ -84,4 +84,20 @@ public class StudentMapperImpl implements StudentMapper {
         }
         return lts;
     }
+
+    public int delStudentById(int userId) {
+        SqlSession session = null;
+        int count = 0;
+        try {
+            session = BaseDAO.getSession();
+            StudentMapper sm = session.getMapper(StudentMapper.class);
+            count = sm.delStudentById(userId);
+            session.commit();
+        } catch (Exception ex) {
+            ex.printStackTrace();
+        } finally {
+            BaseDAO.closeSession(session);
+        }
+        return count;
+    }
 }

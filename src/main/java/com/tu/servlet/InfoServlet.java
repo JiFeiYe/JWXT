@@ -124,11 +124,11 @@ public class InfoServlet extends HttpServlet {
             StudentMapper sm = new StudentMapperImpl();
             boolean isU = sm.updateStudent(s);
 
-            String type = req.getParameter("type");
+            String type = session.getAttribute("type").toString();
             if (isU) { // 更新成功
                 if ("3".equals(type)) {
                     out.print("<script>alert('update success');</script>");
-                    out.print("<script>location.href='allmessage.jsp';</script>");
+                    out.print("<script>location.href='/JWXT/InfoServlet?oper=root';</script>");
                 } else {
                     Student stu = sm.getAllById(userId);
                     session.setAttribute("stu", stu);
@@ -151,17 +151,33 @@ public class InfoServlet extends HttpServlet {
             TeacherMapper tm = new TeacherMapperImpl();
             boolean isU = tm.updateTeacher(t);
 
-            String type = req.getParameter("type");
+            String type = session.getAttribute("type").toString();
             if (isU) { // 更新成功
                 if ("3".equals(type)) {
                     out.print("<script>alert('update success');</script>");
-                    out.print("<script>location.href='allmessage.jsp';</script>");
+                    out.print("<script>location.href='/JWXT/InfoServlet?oper=root';</script>");
                 } else {
                     Teacher tea = tm.getAllById(teachId);
                     session.setAttribute("teach", tea);
                     out.print("<script>alert('update success');</script>");
                     out.print("<script>location.href='teacher.jsp';</script>");
                 }
+            }
+        } else if ("studel".equals(oper)) {
+            int userId = Integer.parseInt(req.getParameter("userId"));
+            StudentMapper sm = new StudentMapperImpl();
+            int count = sm.delStudentById(userId);
+            if (count > 0) {
+                out.print("<script>alert('delete success');</script>");
+                out.print("<script>location.href='/JWXT/InfoServlet?oper=root';</script>");
+            }
+        } else if ("teachdel".equals(oper)) {
+            int teachId = Integer.parseInt(req.getParameter("teachId"));
+            TeacherMapper tm = new TeacherMapperImpl();
+            int count = tm.delTeacherById(teachId);
+            if (count > 0) {
+                out.print("<script>alert('delete success');</script>");
+                out.print("<script>location.href='/JWXT/InfoServlet?oper=root';</script>");
             }
         }
     }

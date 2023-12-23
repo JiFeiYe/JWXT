@@ -13,6 +13,11 @@
             majorID  = #{majorId}
         where userID = #{userId};
     </update>
+    <delete id="delStudentById">
+        delete
+        from jwxt.student
+        where userID = #{userId};
+    </delete>
 
     <select id="getAll" resultType="Student">
         select *

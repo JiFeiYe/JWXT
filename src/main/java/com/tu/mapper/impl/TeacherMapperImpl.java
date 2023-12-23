@@ -85,5 +85,21 @@ public class TeacherMapperImpl implements TeacherMapper {
         return lts;
     }
 
+    public int delTeacherById(int teachId) {
+        SqlSession session = null;
+        int count = 0;
+        try {
+            session = BaseDAO.getSession();
+            TeacherMapper tm = session.getMapper(TeacherMapper.class);
+            count = tm.delTeacherById(teachId);
+            session.commit();
+        } catch (Exception ex) {
+            ex.printStackTrace();
+        } finally {
+            BaseDAO.closeSession(session);
+        }
+        return count;
+    }
+
 
 }

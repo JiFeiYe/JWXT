@@ -39,7 +39,6 @@ public class LoginServlet extends HttpServlet {
             String password = req.getParameter("password");
             LoginMapper lm = new LoginMapperImpl();
             int type = lm.isLogin(userid, password);
-            System.out.println(type);
             if (type == 1) { // 验证成功，1是学生
                 session.setAttribute("userid", userid);
                 session.setAttribute("type", 1);
