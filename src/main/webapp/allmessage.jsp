@@ -40,7 +40,7 @@
     </c:forEach>
     <tr>
         <td colspan="9">
-            一共有${sessionScope.}页
+<%--            一共有${sessionScope.}页--%>
         </td>
     </tr>
 </table>
