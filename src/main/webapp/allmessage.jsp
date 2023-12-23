@@ -11,6 +11,7 @@
 <html>
 <head>
     <title>管理信息</title>
+    <link href="./css/allmessage.css" rel="stylesheet">
 </head>
 <body>
 <table border="1" cellspacing="0" width="700" align="center">
