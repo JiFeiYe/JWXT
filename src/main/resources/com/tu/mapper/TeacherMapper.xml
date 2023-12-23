@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.tu.mapper.TeacherMapper">
+    <update id="updateTeacher">
+        update jwxt.teacher
+        set teachName = #{teachName},
+            teachSex  = #{teachSex},
+            teachAge  = #{teachAge},
+            degree    = #{degree},
+            title     = #{title},
+            roomID    = #{roomId},
+            classID   = #{classId}
+        where teachID = #{teachId};
+    </update>
+
+    <select id="getAll" resultType="Teacher">
+        select *
+        from jwxt.teacher;
+    </select>
+    <select id="getAllById" resultType="Teacher">
+        select *
+        from jwxt.teacher
+        where teachID = #{teachId};
+    </select>
+</mapper>

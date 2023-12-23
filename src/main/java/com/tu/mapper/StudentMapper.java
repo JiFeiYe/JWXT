@@ -1,0 +1,15 @@
+package com.tu.mapper;
+
+import com.tu.pojo.Student;
+import org.apache.ibatis.annotations.Param;
+
+import java.util.List;
+
+public interface StudentMapper {
+    List<Student> getAll();
+
+    Student getAllById(@Param("userId") int userId);
+
+    boolean updateStudent(Student student);
+
+}

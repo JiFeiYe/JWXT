@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>register</title>
+    <link href="./css/register.css" rel="stylesheet">
+</head>
+<body>
+<div class="hd">教务系统</div>
+<div class="form-div">
+    <div class="reg-content">
+        <div class="welc">欢迎注册</div>
+        <span class="login">已有账号？</span> <a href="login.html">登陆</a>
+    </div>
+    <form action="/JWXT/LoginServlet?oper=registerIn" id="form" method="post">
+        <table class="table">
+            <tr class="ta1">
+                <td class="nm">用户名：</td>
+                <td class="inputs">
+                    <input id="userid" name="userid" type="text">
+                    <br>
+                    <span class="err_msg" id="username_err"></span>
+                </td>
+            </tr>
+            <tr class="ta2">
+                <td class="pwd">密码：</td>
+                <td class="inputs">
+                    <input id="password" name="password" type="password">
+                    <br>
+                    <span class="err_msg" id="password_err"></span>
+                </td>
+            </tr>
+            <tr class="ta3">
+                <td class="phone">手机号：</td>
+                <td class="inputs"><input id="tel" name="tel" type="text">
+                    <br>
+                    <span class="err_msg" id="tel_err"></span>
+                </td>
+            </tr>
+        </table>
+        <div class="buttons">
+            <input id="btn" type="submit" value="注 册">
+        </div>
+        <br class="clear">
+    </form>
+</div>
+<script src="webjars/jquery/3.5.1/jquery.min.js"></script>
+<script>
+    $(function () { // post方式，不采用json
+        const userid = $("#userid");
+        const username_err = $("#username_err");
+        username_err.css("color", "red");
+
+        const password = $("#password");
+        const password_err = $("#password_err");
+        password_err.css("color", "red");
+
+        const tel = $("#tel");
+        const tel_err = $("#tel_err");
+        tel_err.css("color", "red");
+
+        let request;
+        userid.blur(() => {
+            request = new XMLHttpRequest();
+            let url = "/JWXT/LoginServlet?oper=register";
+            // 设置回调函数fn
+            request.onreadystatechange = nameCheck;
+            request.open("POST", url, true);
+            let data = "userid=" + userid.val().trim();
+            request.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+            request.send(data);
+        })
+
+        function nameCheck() {
+            if (request.status === 200 && request.readyState === 4) {
+                let isR = request.responseText;
+                const reg = /^\w{4,20}$/ // 长度为4-20的数字或符号
+                const regFlag = reg.test(userid.val().trim());
+                if (userid.val().trim() !== "") { // 不为空
+                    if ("false" === isR.trim()) { // 未从数据库查到名字
+                        if (regFlag) { // 匹配正则
+                            username_err.text("");
+                            return true;
+                        } else {
+                            username_err.text("用户名长度不适合或使用了非法字符");
+                        }
+                    } else { // 查到名字说明账号已被注册
+                        username_err.text("用户名已存在");
+                    }
+                } else { // 未输入
+                    username_err.text("请输入用户名");
+                }
+            }
+            return false;
+        }
+
+        password.blur(function () {
+            passCheck();
+        })
+
+        function passCheck() {
+            /*
+                1. 密码由至少8个字符组成。
+                2. 包含至少一个大写字母、一个小写字母和一个数字。
+             */
+            const reg1 = /^.{8,}$/;
+            const reg2 = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d).+$/;
+            const regFlag1 = reg1.test(password.val().trim());
+            const regFlag2 = reg2.test(password.val().trim());
+            if (password.val().trim() !== "") { // 不为空
+                if (!regFlag1) {
+                    password_err.text("密码应由至少8个字符组成");
+                } else if (!regFlag2) {
+                    password_err.text("密码应包含至少一个大写字母、一个小写字母和一个数字");
+                } else {
+                    password_err.text("");
+                    return true;
+                }
+            } else { // 输入为空
+                password_err.text("请输入密码");
+            }
+            return false;
+        }
+
+        tel.blur(function () {
+            telCheck();
+        })
+
+        function telCheck() {
+            /*
+                1. 手机号为11位数字。
+                2. 可以是以1开头的数字。
+             */
+            const reg = /^1\d{10}$/;
+            const regFlag = reg.test(tel.val().trim());
+            if (tel.val().trim() !== "") {
+                if (!regFlag) {
+                    tel_err.text("手机号格式不正确");
+                } else {
+                    tel_err.text("");
+                    return true;
+                }
+            } else {
+                tel_err.text("请输入手机号");
+            }
+            return false;
+        }
+
+        $("#form").submit(function () { // 提交判断
+            return nameCheck() && passCheck() && telCheck();
+        })
+    }) // jquery
+</script>
+</body>
+</html>
