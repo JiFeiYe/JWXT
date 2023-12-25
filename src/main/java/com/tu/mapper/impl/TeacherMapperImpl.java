@@ -101,5 +101,21 @@ public class TeacherMapperImpl implements TeacherMapper {
         return count;
     }
 
+    public int insertTeacher(Teacher teacher) {
+        SqlSession session = null;
+        int count = 0;
+        try {
+            session = BaseDAO.getSession();
+            TeacherMapper tm = session.getMapper(TeacherMapper.class);
+            count = tm.insertTeacher(teacher);
+            session.commit();
+        } catch (Exception ex) {
+            ex.printStackTrace();
+        } finally {
+            BaseDAO.closeSession(session);
+        }
+        return count;
+    }
+
 
 }

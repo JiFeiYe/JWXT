@@ -24,6 +24,7 @@
     班级<input type="text" class="ips" name="classId" readonly="readonly" value="${sessionScope.stu.classId}"><br/>
     专业<input type="text" class="ips" name="majorId" readonly="readonly" value="${sessionScope.stu.majorId}"><br/>
     <input type="hidden" id="type" value="${sessionScope.type}">
+    <input type="hidden" id="oper" value="${param.oper}">
     <input type="submit" value="提交" class="btn">
 </form>
 <script src="webjars/jquery/3.5.1/jquery.min.js"></script>
@@ -31,8 +32,16 @@
     <%--todo:表单验证--%>
     $(function () {
         const type = $("#type").val().trim();
-        if (type === "3") {
+        const oper = $("#oper").val().trim();
+        console.log(oper);
+        if (type === "3" && oper === "update") {
+            console.log(111111);
             $("form").attr("action", "/JWXT/InfoServlet?oper=studentupdate");
+            $("input").removeAttr("readonly");
+        } else if (type === "3" && oper === "insert") {
+            console.log(222222);
+            $("form").attr("action", "/JWXT/InfoServlet?oper=studentinsert");
+            $(".ips").val("");
             $("input").removeAttr("readonly");
         }
     }) // jquery

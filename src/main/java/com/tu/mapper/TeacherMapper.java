@@ -18,4 +18,6 @@ public interface TeacherMapper {
     List<Teacher> findAllByPage(@Param("start") int start, @Param("pagesize") int pagesize);
 
     int delTeacherById(@Param("teachId") int teachId);
+
+    int insertTeacher(Teacher teacher);
 }

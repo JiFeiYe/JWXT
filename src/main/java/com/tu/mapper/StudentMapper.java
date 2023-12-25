@@ -17,4 +17,6 @@ public interface StudentMapper {
     List<Student> findAllByPage(@Param("start") int start, @Param("pagesize") int pagesize);
 
     int delStudentById(@Param("userId") int userId);
+
+    int insertStudent(Student student);
 }

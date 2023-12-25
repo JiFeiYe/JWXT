@@ -4,6 +4,19 @@
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
 <mapper namespace="com.tu.mapper.TeacherMapper">
+    <insert id="insertTeacher">
+        insert into jwxt.teacher
+        values (#{teachId},
+                #{teachName},
+                #{teachSex},
+                #{teachAge},
+                #{degree},
+                #{title},
+                #{teachYear},
+                #{roomId},
+                #{classId}
+                );
+    </insert>
     <update id="updateTeacher">
         update jwxt.teacher
         set teachName = #{teachName},

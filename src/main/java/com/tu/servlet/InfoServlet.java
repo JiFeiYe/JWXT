@@ -89,13 +89,15 @@ public class InfoServlet extends HttpServlet {
                 StudentMapper sm = new StudentMapperImpl();
                 Student stu = sm.getAllById(Integer.parseInt(userid));
                 session.setAttribute("stu", stu);
-                resp.sendRedirect("studentdetail.jsp");
+//                req.setAttribute("oper", "update");
+                resp.sendRedirect("studentdetail.jsp?oper=update");
             } else if ("teach".equals(man)) {
                 String teachid = req.getParameter("teachId");
                 TeacherMapper tm = new TeacherMapperImpl();
                 Teacher teach = tm.getAllById(Integer.parseInt(teachid));
                 session.setAttribute("teach", teach);
-                resp.sendRedirect("teacherdetail.jsp");
+//                req.setAttribute("oper", "update");
+                resp.sendRedirect("teacherdetail.jsp?oper=update");
             }
         } else if ("student".equals(oper)) { // session返回学生信息
             String temp = session.getAttribute("userid").toString();
@@ -177,6 +179,40 @@ public class InfoServlet extends HttpServlet {
             int count = tm.delTeacherById(teachId);
             if (count > 0) {
                 out.print("<script>alert('delete success');</script>");
+                out.print("<script>location.href='/JWXT/InfoServlet?oper=root';</script>");
+            }
+        } else if ("studentinsert".equals(oper)) {
+            int userId = Integer.parseInt(req.getParameter("userId"));
+            String userName = req.getParameter("userName");
+            int userSex = Integer.parseInt(req.getParameter("userSex"));
+            int userAge = Integer.parseInt(req.getParameter("userAge"));
+            String markYear = req.getParameter("markYear");
+            int classId = Integer.parseInt(req.getParameter("classId"));
+            int majorId = Integer.parseInt(req.getParameter("majorId"));
+
+            Student student = new Student(userId, userName, userSex, userAge, markYear, classId, majorId);
+            StudentMapper sm = new StudentMapperImpl();
+            int count = sm.insertStudent(student);
+            if (count > 0) {
+                out.print("<script>alert('insert success');</script>");
+                out.print("<script>location.href='/JWXT/InfoServlet?oper=root';</script>");
+            }
+        } else if ("teacherinsert".equals(oper)) {
+            int teachId = Integer.parseInt(req.getParameter("teachId"));
+            String teachName = req.getParameter("teachName");
+            int teachSex = Integer.parseInt(req.getParameter("teachSex"));
+            int teachAge = Integer.parseInt(req.getParameter("teachAge"));
+            String degree = req.getParameter("degree");
+            String title = req.getParameter("title");
+            String teachYear = req.getParameter("teachYear");
+            int roomId = Integer.parseInt(req.getParameter("roomId"));
+            int classId = Integer.parseInt(req.getParameter("classId"));
+
+            Teacher teacher = new Teacher(teachId, teachName, teachSex, teachAge, degree, title, teachYear, roomId, classId);
+            TeacherMapper tm = new TeacherMapperImpl();
+            int count = tm.insertTeacher(teacher);
+            if (count > 0) {
+                out.print("<script>alert('insert success');</script>");
                 out.print("<script>location.href='/JWXT/InfoServlet?oper=root';</script>");
             }
         }

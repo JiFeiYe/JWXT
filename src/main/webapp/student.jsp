@@ -28,7 +28,7 @@
                 <p><strong>MarkYear:</strong> ${sessionScope.stu.markYear}</p>
                 <p><strong>ClassId:</strong> ${sessionScope.stu.classId}</p>
                 <p><strong>MajorId:</strong> ${sessionScope.stu.majorId}</p>
-                <a href="studentdetail.jsp" class="revise">修改</a>
+                <a href="studentdetail.jsp?oper=update" class="revise">修改</a>
             </div>
         </div>
     </div>

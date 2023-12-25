@@ -30,7 +30,7 @@
                 <p><strong>TeachYear:</strong> ${sessionScope.teach.teachYear}</p>
                 <p><strong>RoomId:</strong> ${sessionScope.teach.roomId}</p>
                 <p><strong>ClassId:</strong> ${sessionScope.teach.classId}</p>
-                <a href="teacherdetail.jsp" class="revise">修改</a>
+                <a href="teacherdetail.jsp?oper=update" class="revise">修改</a>
             </div>
         </div>
     </div>

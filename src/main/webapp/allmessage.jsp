@@ -14,6 +14,10 @@
     <link href="./css/allmessage.css" rel="stylesheet">
 </head>
 <body>
+<form action="studentdetail.jsp?oper=insert" method="post">
+    <input type="hidden" id="stu">
+    <input type="submit" value="新增学生">
+</form>
 <table border="1" cellspacing="0" width="700" align="center">
     <tr>
         <th>学号</th>
@@ -36,7 +40,7 @@
             <td>${stu.classId}</td>
             <td>${stu.majorId}</td>
             <td><a href="/JWXT/InfoServlet?oper=detail&man=stu&userId=${stu.userId}" id="update_stu">修改</a></td>
-            <td><a href="/JWXT/InfoServlet?oper=studel&userId=${stu.userId}">删除</a></td>
+            <td><a href="/JWXT/InfoServlet?oper=studel&userId=${stu.userId}" class="del_stu">删除</a></td>
         </tr>
     </c:forEach>
     <tr>
@@ -71,6 +75,10 @@
 
 <br/>
 
+<form action="teacherdetail.jsp?oper=insert" method="post">
+    <input type="hidden" id="teach">
+    <input type="submit" value="新增老师">
+</form>
 <table border="1" cellspacing="0" width="700" align="center">
     <tr>
         <th>职工号</th>
@@ -96,9 +104,8 @@
             <td>${teach.teachYear}</td>
             <td>${teach.roomId}</td>
             <td>${teach.classId}</td>
-            <td><a href="/JWXT/InfoServlet?oper=detail&man=teach&teachId=${teach.teachId}" id="update_teach">修改</a>
-            </td>
-            <td><a href="/JWXT/InfoServlet?oper=teachdel&teachId=${teach.teachId}">删除</a></td>
+            <td><a href="/JWXT/InfoServlet?oper=detail&man=teach&teachId=${teach.teachId}" id="update_teach">修改</a></td>
+            <td><a href="/JWXT/InfoServlet?oper=teachdel&teachId=${teach.teachId}" class="del_teach">删除</a></td>
         </tr>
     </c:forEach>
     <tr>
@@ -130,13 +137,17 @@
         </td>
     </tr>
 </table>
-<%--<script src="webjars/jquery/3.5.1/jquery.min.js"></script>
+<script src="webjars/jquery/3.5.1/jquery.min.js"></script>
 <script>
-    $(function (){
-        $("#update_stu").click(function (){
-            sessionStorage.setItem("stu", ${stu})
+    $(function () {
+        $(".del_stu").click(function () {
+            console.log(11111111);
+            return confirm("确认删除吗？");
+        })
+        $(".del_teach").click(function () {
+            return confirm("确认删除吗？");
         })
     }) //jquery
-</script>--%>
+</script>
 </body>
 </html>

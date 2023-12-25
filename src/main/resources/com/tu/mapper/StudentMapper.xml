@@ -4,6 +4,17 @@
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
 <mapper namespace="com.tu.mapper.StudentMapper">
+    <insert id="insertStudent">
+        insert into jwxt.student
+        values (#{userId},
+                #{userName},
+                #{userSex},
+                #{userAge},
+                #{markYear},
+                #{classId},
+                #{majorId}
+                );
+    </insert>
     <update id="updateStudent">
         update jwxt.student
         set userName = #{userName},

@@ -100,4 +100,20 @@ public class StudentMapperImpl implements StudentMapper {
         }
         return count;
     }
+
+    public int insertStudent(Student student) {
+        SqlSession session = null;
+        int count = 0;
+        try {
+            session = BaseDAO.getSession();
+            StudentMapper sm = session.getMapper(StudentMapper.class);
+            count = sm.insertStudent(student);
+            session.commit();
+        } catch (Exception ex) {
+            ex.printStackTrace();
+        } finally {
+            BaseDAO.closeSession(session);
+        }
+        return count;
+    }
 }
