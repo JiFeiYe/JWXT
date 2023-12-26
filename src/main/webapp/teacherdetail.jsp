@@ -15,7 +15,7 @@
 </head>
 <body>
 <form action="/JWXT/InfoServlet?oper=teacherupdate" method="post">
-    职工<input type="text" class="ips" name="teachId" readonly="readonly" value="${sessionScope.teach.teachId}"><br/>
+    职工号<input type="text" class="ips" name="teachId" readonly="readonly" value="${sessionScope.teach.teachId}"><br/>
     名字<input type="text" class="ips" name="teachName" readonly="readonly"
                value="${sessionScope.teach.teachName}"><br/>
     性别<input type="text" class="ips" name="teachSex" value="${sessionScope.teach.teachSex}"><br/>

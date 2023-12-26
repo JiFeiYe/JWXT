@@ -33,13 +33,10 @@
     $(function () {
         const type = $("#type").val().trim();
         const oper = $("#oper").val().trim();
-        console.log(oper);
         if (type === "3" && oper === "update") {
-            console.log(111111);
             $("form").attr("action", "/JWXT/InfoServlet?oper=studentupdate");
             $("input").removeAttr("readonly");
         } else if (type === "3" && oper === "insert") {
-            console.log(222222);
             $("form").attr("action", "/JWXT/InfoServlet?oper=studentinsert");
             $(".ips").val("");
             $("input").removeAttr("readonly");

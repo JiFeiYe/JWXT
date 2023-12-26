@@ -141,7 +141,6 @@
 <script>
     $(function () {
         $(".del_stu").click(function () {
-            console.log(11111111);
             return confirm("确认删除吗？");
         })
         $(".del_teach").click(function () {
