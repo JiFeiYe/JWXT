@@ -16,7 +16,7 @@
 <body>
 <form action="studentdetail.jsp?oper=insert" method="post">
     <input type="hidden" id="stu">
-    <input type="submit" value="新增学生">
+    <input type="submit" value="新增学生" class="new">
 </form>
 <table border="1" cellspacing="0" width="700" align="center">
     <tr>
@@ -77,7 +77,7 @@
 
 <form action="teacherdetail.jsp?oper=insert" method="post">
     <input type="hidden" id="teach">
-    <input type="submit" value="新增老师">
+    <input type="submit" value="新增老师" class="new">
 </form>
 <table border="1" cellspacing="0" width="700" align="center">
     <tr>

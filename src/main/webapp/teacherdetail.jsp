@@ -15,7 +15,7 @@
 </head>
 <body>
 <form action="/JWXT/InfoServlet?oper=teacherupdate" method="post">
-    职工号<input type="text" class="ips" name="teachId" readonly="readonly" value="${sessionScope.teach.teachId}"><br/>
+    职工号<input type="text" id="teachId" class="ips" name="teachId" readonly="readonly" value="${sessionScope.teach.teachId}"><br/>
     名字<input type="text" class="ips" name="teachName" readonly="readonly"
                value="${sessionScope.teach.teachName}"><br/>
     性别<input type="text" class="ips" name="teachSex" value="${sessionScope.teach.teachSex}"><br/>
@@ -35,10 +35,10 @@
     $(function () {
         const type = $("#type").val().trim();
         const oper = $("#oper").val().trim();
-        console.log(oper);
         if (type === "3" && oper === "update") {
             $("form").attr("action", "/JWXT/InfoServlet?oper=teacherupdate");
             $("input").removeAttr("readonly");
+            $("#teachId").attr("readonly", "readonly");
         } else if (type === "3" && oper === "insert") {
             $("form").attr("action", "/JWXT/InfoServlet?oper=teacherinsert");
             $(".ips").val("");

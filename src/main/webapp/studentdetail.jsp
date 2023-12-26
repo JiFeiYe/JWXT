@@ -15,7 +15,7 @@
 </head>
 <body>
 <form action="/JWXT/InfoServlet?oper=studentupdate" method="post">
-    学号<input type="text" class="ips" name="userId" readonly="readonly" value="${sessionScope.stu.userId}"><br/>
+    学号<input type="text" id="userId" class="ips" name="userId" readonly="readonly" value="${sessionScope.stu.userId}"><br/>
     名字<input type="text" class="ips" name="userName" readonly="readonly" value="${sessionScope.stu.userName}"><br/>
     性别<input type="text" class="ips" name="userSex" value="${sessionScope.stu.userSex}"><br/>
     年龄<input type="text" class="ips" name="userAge" value="${sessionScope.stu.userAge}"><br/>
@@ -36,6 +36,7 @@
         if (type === "3" && oper === "update") {
             $("form").attr("action", "/JWXT/InfoServlet?oper=studentupdate");
             $("input").removeAttr("readonly");
+            $("#userId").attr("readonly", "readonly");
         } else if (type === "3" && oper === "insert") {
             $("form").attr("action", "/JWXT/InfoServlet?oper=studentinsert");
             $(".ips").val("");

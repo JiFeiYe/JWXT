@@ -12,17 +12,31 @@
                 #{userAge},
                 #{markYear},
                 #{classId},
-                #{majorId}
-                );
+                #{majorId});
     </insert>
     <update id="updateStudent">
         update jwxt.student
-        set userName = #{userName},
-            userSex  = #{userSex},
-            userAge  = #{userAge},
-            classID  = #{classId},
-            majorID  = #{majorId}
-        where userID = #{userId};
+        <set>
+            <if test="userName != null and userName != ''">
+                userName = #{userName},
+            </if>
+            <if test="userSex != null and userSex != ''">
+                userSex = #{userSex},
+            </if>
+            <if test="userAge != null and userAge != ''">
+                userAge = #{userAge},
+            </if>
+            <if test="markYear != null and markYear != ''">
+                markYear = #{markYear},
+            </if>
+            <if test="classId != null and classId != ''">
+                classID = #{classId},
+            </if>
+            <if test="majorId != null and majorId != ''">
+                majorID = #{majorId},
+            </if>
+        </set>
+            where userID = #{userId};
     </update>
     <delete id="delStudentById">
         delete
